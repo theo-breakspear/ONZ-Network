@@ -27,3 +27,7 @@ __MACOSX
 
 # VS Code
 .vscode/
+
+# dist stuff built by pyvis
+dist*
+lib*
