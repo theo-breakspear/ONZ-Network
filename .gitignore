@@ -1,0 +1,29 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+.python-version
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS folder attributes
+.Icon?
+.Spotlight-V100
+.Trashes
+__MACOSX
+
+# VS Code
+.vscode/
