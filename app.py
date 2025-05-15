@@ -1,17 +1,39 @@
 from pyvis.network import Network
+import webbrowser
+import pandas
+import itertools
+
+df = pandas.read_csv("publications.csv")
+
+authors = df['Name'].unique()
+
+papers = df['Title'].unique()
+
+authorList = {}
+
+for paper in papers:
+    paperAuthors = df.loc[df['Title'] == paper, 'Name'].tolist()
+    if len(paperAuthors) > 1:
+        authorList[paper] = paperAuthors
+
+edgelist = []
+
+for paper in authorList:
+    edgelist += list(itertools.combinations(authorList[paper], 2))
 
 # Create a Pyvis Network
 net = Network(notebook=False)
+net.barnes_hut(damping=0.5)
 
 # Add nodes
-net.add_node("A", label="Node A")
-net.add_node("B", label="Node B")
-net.add_node("C", label="Node C")
+for author in authors:
+    net.add_node(author, label=author)
 
-# Add edges
-net.add_edge("A", "B")
-net.add_edge("B", "C")
-net.add_edge("C", "A")
+#Add edges
+for edge in edgelist:
+    net.add_edge(edge[0], edge[1])
 
 # Save and show the graph
 net.show("dist/simple_graph1.html", notebook=False)
+webbrowser.open("dist/simple_graph1.html")
+
